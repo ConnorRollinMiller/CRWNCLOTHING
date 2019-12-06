@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import FormInput from '../form-input/FormInput';
 import Button from '../button/Button';
 
 import { auth, signInWithGoogle } from '../../firebase/utils';
 
-import './SignIn.scss';
+const SignInContainer = styled.div`
+   width: 380px;
+   display: flex;
+   flex-direction: column;
+`;
+
+const ButtonsContainer = styled.div`
+   display: flex;
+   justify-content: space-between;
+`;
+
+const SignInTitle = styled.h2`
+   margin: 10px 0;
+`;
 
 const SignIn = () => {
    const [formData, setFormData] = useState({ email: '', password: '' });
@@ -15,13 +29,13 @@ const SignIn = () => {
       setFormData({ ...formData, [name]: value });
    };
 
-   const handleSubmit = e => {
+   const handleSubmit = async e => {
       e.preventDefault();
 
       const { email, password } = formData;
 
       try {
-         auth.signInWithEmailAndPassword(email, password);
+         await auth.signInWithEmailAndPassword(email, password);
 
          setFormData({ email: '', password: '' });
       } catch (err) {
@@ -30,8 +44,8 @@ const SignIn = () => {
    };
 
    return (
-      <div className='sign-in'>
-         <h2>I already have an account</h2>
+      <SignInContainer>
+         <SignInTitle>I already have an account</SignInTitle>
          <span>Sign in with your email & password</span>
          <form onSubmit={handleSubmit}>
             <FormInput
@@ -50,14 +64,14 @@ const SignIn = () => {
                handleChange={handleChange}
                required
             />
-            <div className='buttons'>
+            <ButtonsContainer>
                <Button type='submit'>Sign in</Button>
                <Button onClick={signInWithGoogle} isGoogleSignIn>
                   Sign in with Google
                </Button>
-            </div>
+            </ButtonsContainer>
          </form>
-      </div>
+      </SignInContainer>
    );
 };
 

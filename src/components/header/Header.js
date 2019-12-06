@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -13,42 +13,53 @@ import { logoutUser } from '../../redux/actions/userActions';
 import { selectCurrentUser } from '../../redux/selectors/userSelectors';
 import { selectCartHidden } from '../../redux/selectors/cartSelectors';
 
-import './Header.scss';
+const HeaderContainer = styled.header`
+   height: 70px;
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 25px;
+`;
 
-const Header = ({ currentUser, isHidden }) => {
-   const handleLogout = e => {
-      e.preventDefault();
+const LogoContainer = styled(Link)`
+   height: 100%;
+   width: 70px;
+   padding: 25px;
+`;
 
-      logoutUser();
-   };
+const OptionsContainer = styled.div`
+   width: 50%;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+`;
 
-   return (
-      <header className='header'>
-         <Link className='logo-container' to='/'>
-            <Logo className='logo' />
-         </Link>
-         <div className='options'>
-            <Link className='option' to='/shop'>
-               SHOP
-            </Link>
-            <Link className='option' to='/contact'>
-               CONTACT
-            </Link>
-            {currentUser ? (
-               <div className='option' onClick={handleLogout}>
-                  SIGN OUT
-               </div>
-            ) : (
-               <Link className='option' to='/signin'>
-                  SIGN IN
-               </Link>
-            )}
-            <CartIcon />
-         </div>
-         {!isHidden && <CartDropdown />}
-      </header>
-   );
-};
+const OptionLink = styled(Link)`
+   padding: 10px 15px;
+   cursor: pointer;
+`;
+
+const Header = ({ currentUser, isHidden }) => (
+   <HeaderContainer>
+      <LogoContainer to='/'>
+         <Logo className='logo' />
+      </LogoContainer>
+      <OptionsContainer>
+         <OptionLink to='/shop'>SHOP</OptionLink>
+         <OptionLink to='/contact'>CONTACT</OptionLink>
+         {currentUser ? (
+            <OptionLink as='div' onClick={() => logoutUser()}>
+               SIGN OUT
+            </OptionLink>
+         ) : (
+            <OptionLink to='/signin'>SIGN IN</OptionLink>
+         )}
+         <CartIcon />
+      </OptionsContainer>
+      {!isHidden && <CartDropdown />}
+   </HeaderContainer>
+);
 
 Header.propTypes = {
    currentUser: PropTypes.object,

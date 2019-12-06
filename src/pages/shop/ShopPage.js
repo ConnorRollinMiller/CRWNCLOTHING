@@ -6,10 +6,10 @@ import CollectionsOverview from '../../components/collections-overview/Collectio
 import CollectionPage from '../collection/CollectionPage';
 
 const ShopPage = ({ match }) => (
-   <div className='shop-page'>
+   <main className='shop-page'>
       <Route exact path={`${match.path}`} component={CollectionsOverview} />
       <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
-   </div>
+   </main>
 );
 
 ShopPage.propTypes = {

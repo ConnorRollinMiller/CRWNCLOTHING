@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import CollectionPreview from '../collection-preview/CollectionPreview';
 import { selectCollectionsForPreview } from '../../redux/selectors/shopSelectors';
 
-import './CollectionsOverview.scss';
+const CollectionsOverviewContainer = styled.div`
+   display: flex;
+   flex-direction: column;
+`;
 
 const CollectionsOverview = ({ collections }) => (
-   <div className='collection-overview'>
+   <CollectionsOverviewContainer>
       {collections.map(({ id, ...collectionProps }) => (
          <CollectionPreview key={id} {...collectionProps} />
       ))}
-   </div>
+   </CollectionsOverviewContainer>
 );
 
 CollectionsOverview.propTypes = {

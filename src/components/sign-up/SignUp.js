@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import FormInput from '../form-input/FormInput';
 import Button from '../button/Button';
 
 import { auth, createUserProfileDocument } from '../../firebase/utils';
 
-import './SignUp.scss';
+const SignUpContainer = styled.div`
+   display: flex;
+   flex-direction: column;
+   width: 380px;
+`;
+
+const SignUpTitle = styled.h2`
+   margin: 10px 0;
+`;
 
 const SignUp = () => {
    const [formData, setFormData] = useState({
@@ -36,7 +45,7 @@ const SignUp = () => {
             password
          );
 
-         createUserProfileDocument(user, { displayName: displayName });
+         await createUserProfileDocument(user, { displayName: displayName });
 
          setFormData({
             displayName: '',
@@ -50,8 +59,8 @@ const SignUp = () => {
    };
 
    return (
-      <div className='sign-up'>
-         <h2 className=''>I do not have an account</h2>
+      <SignUpContainer>
+         <SignUpTitle>I do not have an account</SignUpTitle>
          <span>Sign up with your email or password</span>
          <form className='sign-up-form' onSubmit={handleSubmit}>
             <FormInput
@@ -88,7 +97,7 @@ const SignUp = () => {
             />
             <Button type='submit'>SIGN UP</Button>
          </form>
-      </div>
+      </SignUpContainer>
    );
 };
 

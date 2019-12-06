@@ -7,15 +7,13 @@ const HomePageContainer = styled.main`
    display: flex;
    flex-direction: column;
    align-items: center;
-   padding: 20px 80px;
+   padding: 20px 0px;
 `;
 
-const HomePage = () => {
-   return (
-      <HomePageContainer>
-         <Directory />
-      </HomePageContainer>
-   );
-};
+const HomePage = () => (
+   <HomePageContainer>
+      <Directory />
+   </HomePageContainer>
+);
 
 export default HomePage;

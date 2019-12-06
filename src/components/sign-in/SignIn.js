@@ -7,7 +7,8 @@ import Button from '../button/Button';
 import { auth, signInWithGoogle } from '../../firebase/utils';
 
 const SignInContainer = styled.div`
-   width: 380px;
+   width: 48%;
+   margin-right: 2%;
    display: flex;
    flex-direction: column;
 `;

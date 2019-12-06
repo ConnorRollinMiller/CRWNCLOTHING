@@ -16,7 +16,7 @@ import { selectCurrentUser } from './redux/selectors/userSelectors';
 
 import './App.css';
 
-const App = ({ currentUser, setCurrentUser }) => {
+const App = ({ currentUser, setCurrentUser, collections }) => {
    useEffect(() => {
       let unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
          if (userAuth) {
@@ -36,7 +36,7 @@ const App = ({ currentUser, setCurrentUser }) => {
    }, [setCurrentUser]);
 
    return (
-      <div>
+      <React.Fragment>
          <Header />
          <Switch>
             <Route exact path='/' component={HomePage} />
@@ -50,7 +50,7 @@ const App = ({ currentUser, setCurrentUser }) => {
                }
             />
          </Switch>
-      </div>
+      </React.Fragment>
    );
 };
 

@@ -17,11 +17,11 @@ const CheckoutItemContainer = styled.div`
    padding: 15px 0;
    font-size: 20px;
    align-items: center;
+   text-align: center;
 `;
 
 const ImageContainer = styled.div`
-   width: 23%;
-   padding-right: 15px;
+   width: 20%;
    img {
       width: 100%;
       height: 100%;
@@ -29,11 +29,12 @@ const ImageContainer = styled.div`
 `;
 
 const TextContainer = styled.span`
-   width: 23%;
+   width: 20%;
 `;
 
 const QuantityContainer = styled(TextContainer)`
    display: flex;
+   justify-content: center;
 
    div {
       cursor: pointer;
@@ -45,8 +46,10 @@ const QuantityContainer = styled(TextContainer)`
 `;
 
 const RemoveButtonContainer = styled.div`
-   padding-left: 12px;
+   width: 20%;
    cursor: pointer;
+   display: flex;
+   justify-content: center;
 `;
 
 const CheckoutItem = ({ cartItem, removeItem, addItem, clearItem }) => {

@@ -13,7 +13,7 @@ import {
 } from '../../redux/selectors/cartSelectors';
 
 const CheckoutPageContainer = styled.main`
-   width: 55%;
+   width: 850px;
    min-height: 90vh;
    display: flex;
    flex-direction: column;
@@ -36,11 +36,8 @@ const CheckoutHeaderContainer = styled.div`
 
 const CheckoutHeaderBlockContainer = styled.div`
    text-transform: capitalize;
-   width: 23%;
-
-   &:last-child {
-      width: 8%;
-   }
+   width: 20%;
+   text-align: center;
 `;
 
 const TotalContainer = styled.div`

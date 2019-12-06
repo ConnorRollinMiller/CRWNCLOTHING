@@ -7,9 +7,10 @@ import Button from '../button/Button';
 import { auth, createUserProfileDocument } from '../../firebase/utils';
 
 const SignUpContainer = styled.div`
+   width: 48%;
    display: flex;
    flex-direction: column;
-   width: 380px;
+   margin-left: 2%;
 `;
 
 const SignUpTitle = styled.h2`

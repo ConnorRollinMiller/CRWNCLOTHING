@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import FormInput from '../form-input/FormInput';
 import Button from '../button/Button';
 
-import { auth, signInWithGoogle } from '../../firebase/utils';
+import {
+   googleSignInStart,
+   emailSignInStart
+} from '../../redux/actions/userActions';
 
 const SignInContainer = styled.div`
    width: 48%;
@@ -22,7 +27,7 @@ const SignInTitle = styled.h2`
    margin: 10px 0;
 `;
 
-const SignIn = () => {
+const SignIn = ({ googleSignInStart, emailSignInStart }) => {
    const [formData, setFormData] = useState({ email: '', password: '' });
 
    const handleChange = e => {
@@ -35,13 +40,9 @@ const SignIn = () => {
 
       const { email, password } = formData;
 
-      try {
-         await auth.signInWithEmailAndPassword(email, password);
+      emailSignInStart(email, password);
 
-         setFormData({ email: '', password: '' });
-      } catch (err) {
-         console.error(err.message);
-      }
+      setFormData({ email: '', password: '' });
    };
 
    return (
@@ -67,7 +68,7 @@ const SignIn = () => {
             />
             <ButtonsContainer>
                <Button type='submit'>Sign in</Button>
-               <Button onClick={signInWithGoogle} isGoogleSignIn>
+               <Button type='button' onClick={googleSignInStart} isGoogleSignIn>
                   Sign in with Google
                </Button>
             </ButtonsContainer>
@@ -76,4 +77,15 @@ const SignIn = () => {
    );
 };
 
-export default SignIn;
+SignIn.propTypes = {
+   googleSignInStart: PropTypes.func.isRequired,
+   emailSignInStart: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => ({
+   googleSignInStart: () => dispatch(googleSignInStart()),
+   emailSignInStart: (email, password) =>
+      dispatch(emailSignInStart({ email, password }))
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);

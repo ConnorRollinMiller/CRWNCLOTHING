@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import FormInput from '../form-input/FormInput';
 import Button from '../button/Button';
 
-import { auth, createUserProfileDocument } from '../../firebase/utils';
+import { signUpStart } from '../../redux/actions/userActions';
 
 const SignUpContainer = styled.div`
    width: 48%;
@@ -17,7 +19,7 @@ const SignUpTitle = styled.h2`
    margin: 10px 0;
 `;
 
-const SignUp = () => {
+const SignUp = ({ signUpStart }) => {
    const [formData, setFormData] = useState({
       displayName: '',
       email: '',
@@ -40,23 +42,14 @@ const SignUp = () => {
          return;
       }
 
-      try {
-         const { user } = await auth.createUserWithEmailAndPassword(
-            email,
-            password
-         );
+      signUpStart(email, password, displayName);
 
-         await createUserProfileDocument(user, { displayName: displayName });
-
-         setFormData({
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-         });
-      } catch (err) {
-         console.error(err);
-      }
+      // setFormData({
+      //    displayName: '',
+      //    email: '',
+      //    password: '',
+      //    confirmPassword: ''
+      // });
    };
 
    return (
@@ -102,4 +95,13 @@ const SignUp = () => {
    );
 };
 
-export default SignUp;
+SignUp.propTypes = {
+   signUpStart: PropTypes.func.isRequired
+};
+
+const mapStateToProps = dispatch => ({
+   signUpStart: (email, password, displayName) =>
+      dispatch(signUpStart({ email, password, displayName }))
+});
+
+export default connect(null, mapStateToProps)(SignUp);

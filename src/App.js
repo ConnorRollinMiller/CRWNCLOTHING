@@ -10,30 +10,15 @@ import ShopPage from './pages/shop/ShopPage';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/SignInAndSignUpPage';
 import CheckoutPage from './pages/checkout/CheckoutPage';
 
-import { auth, createUserProfileDocument } from './firebase/utils';
-import { setCurrentUser } from './redux/actions/userActions';
+import { checkUserSession } from './redux/actions/userActions';
 import { selectCurrentUser } from './redux/selectors/userSelectors';
 
 import './App.css';
 
-const App = ({ currentUser, setCurrentUser, collections }) => {
+const App = ({ currentUser, checkUserSession }) => {
    useEffect(() => {
-      let unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-         if (userAuth) {
-            const userRef = await createUserProfileDocument(userAuth);
-
-            userRef.onSnapshot(snapShot => {
-               setCurrentUser({ id: snapShot.id, ...snapShot.data() });
-            });
-         }
-
-         setCurrentUser(userAuth);
-      });
-
-      return () => {
-         unsubscribeFromAuth();
-      };
-   }, [setCurrentUser]);
+      checkUserSession();
+   }, [checkUserSession]);
 
    return (
       <React.Fragment>
@@ -55,7 +40,7 @@ const App = ({ currentUser, setCurrentUser, collections }) => {
 };
 
 App.propTypes = {
-   setCurrentUser: PropTypes.func.isRequired,
+   checkUserSession: PropTypes.func.isRequired,
    currentUser: PropTypes.object
 };
 
@@ -64,7 +49,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-   setCurrentUser: user => dispatch(setCurrentUser(user))
+   checkUserSession: () => dispatch(checkUserSession())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

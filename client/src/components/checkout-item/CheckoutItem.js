@@ -18,6 +18,10 @@ const CheckoutItemContainer = styled.div`
    font-size: 20px;
    align-items: center;
    text-align: center;
+
+   @media screen and (max-width: 800px) {
+      font-size: 18px;
+   }
 `;
 
 const ImageContainer = styled.div`
@@ -29,7 +33,11 @@ const ImageContainer = styled.div`
 `;
 
 const TextContainer = styled.span`
-   width: 20%;
+   width: 23%;
+
+   @media screen and (max-width: 800px) {
+      width: 22%;
+   }
 `;
 
 const QuantityContainer = styled(TextContainer)`

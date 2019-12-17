@@ -13,10 +13,25 @@ const SignUpContainer = styled.div`
    display: flex;
    flex-direction: column;
    margin-left: 2%;
+
+   @media screen and (max-width: 800px) {
+      width: 80%;
+      margin-right: 0;
+      margin: auto;
+   }
 `;
 
 const SignUpTitle = styled.h2`
    margin: 10px 0;
+`;
+
+const ButtonsContainer = styled.div`
+   display: flex;
+   justify-content: space-between;
+
+   @media screen and (max-width: 800px) {
+      flex-direction: column;
+   }
 `;
 
 const SignUp = ({ signUpStart }) => {
@@ -82,7 +97,9 @@ const SignUp = ({ signUpStart }) => {
                label='Confirm Password'
                required
             />
-            <Button type='submit'>SIGN UP</Button>
+            <ButtonsContainer>
+               <Button type='submit'>SIGN UP</Button>
+            </ButtonsContainer>
          </form>
       </SignUpContainer>
    );

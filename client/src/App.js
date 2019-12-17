@@ -13,7 +13,7 @@ import CheckoutPage from './pages/checkout/CheckoutPage';
 import { checkUserSession } from './redux/actions/userActions';
 import { selectCurrentUser } from './redux/selectors/userSelectors';
 
-import './App.css';
+import { GlobalStyles } from './globalStyles';
 
 const App = ({ currentUser, checkUserSession }) => {
    useEffect(() => {
@@ -22,6 +22,7 @@ const App = ({ currentUser, checkUserSession }) => {
 
    return (
       <React.Fragment>
+         <GlobalStyles />
          <Header />
          <Switch>
             <Route exact path='/' component={HomePage} />

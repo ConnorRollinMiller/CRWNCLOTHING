@@ -8,6 +8,16 @@ const SignInAndSignUpContainer = styled.main`
    display: flex;
    justify-content: space-between;
    margin: 30px 0;
+
+   @media screen and (max-width: 800px) {
+      flex-direction: column;
+      width: unset;
+      align-items: center;
+
+      > *:first-child {
+         margin-bottom: 50px;
+      }
+   }
 `;
 const SignInAndSignUp = () => (
    <SignInAndSignUpContainer>

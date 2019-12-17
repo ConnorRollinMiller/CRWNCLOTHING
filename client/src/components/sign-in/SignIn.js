@@ -16,11 +16,21 @@ const SignInContainer = styled.div`
    margin-right: 2%;
    display: flex;
    flex-direction: column;
+
+   @media screen and (max-width: 800px) {
+      width: 80%;
+      margin-right: 0;
+      margin: auto;
+   }
 `;
 
 const ButtonsContainer = styled.div`
    display: flex;
    justify-content: space-between;
+
+   @media screen and (max-width: 800px) {
+      flex-direction: column;
+   }
 `;
 
 const SignInTitle = styled.h2`
